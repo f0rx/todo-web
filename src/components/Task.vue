@@ -73,6 +73,7 @@ export default {
     date(newDate, oldDate) {
       this.was_reschedulded = newDate != oldDate;
     },
+    
     was_reschedulded() {
       //
     }

@@ -6,7 +6,7 @@
       indeterminate
       hide-details
       v-ripple="{ class: 'grey--text', center: true }"
-      @click="snackbar = true"
+      @click="rescheduleSnackbar = true"
     >
       <template v-slot:label>Meet Clients</template>
     </v-checkbox>
@@ -15,7 +15,7 @@
     <v-dialog ref="dialog" v-model="date_picker_modal" :return-value.sync="date" width="290px">
       <template v-slot:activator="{ on }">
         <!-- Activator -->
-        <v-snackbar v-model="snackbar" bottom :timeout="8000" v-on="on">
+        <v-snackbar v-model="rescheduleSnackbar" bottom :timeout="8000" v-on="on">
           Reschedule?
           <v-btn color="white" text>Yes</v-btn>
         </v-snackbar>
@@ -52,7 +52,7 @@ export default {
     snackbar_msg: null,
     date: new Date().toISOString().substr(0, 10),
     time: null,
-    snackbar: false,
+    rescheduleSnackbar: false,
     notifySnackbar: false,
     was_reschedulded: false,
     date_picker_modal: false,
@@ -73,7 +73,7 @@ export default {
     date(newDate, oldDate) {
       this.was_reschedulded = newDate != oldDate;
     },
-    
+
     was_reschedulded() {
       //
     }

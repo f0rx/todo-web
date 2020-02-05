@@ -22,7 +22,7 @@
       <v-tooltip left>
         <template v-slot:activator="{ on }">
           <v-btn fab dark small color="indigo" v-on="on" @click="toggleTaskModal">
-            <v-icon>mdi-file-outline</v-icon>
+            <v-icon>mdi-clipboard-text</v-icon>
           </v-btn>
         </template>
         <span>Add task</span>

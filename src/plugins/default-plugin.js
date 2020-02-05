@@ -1,3 +1,4 @@
+import mixin from "./main-mixin";
 const MyPlugin = {
   install: (Vue, options) => {
     Vue.directive("focus", {
@@ -6,6 +7,8 @@ const MyPlugin = {
         el.focus();
       }
     });
+
+    Vue.mixin(mixin);
 
     // Vue.prototype.$Get = function() {
     //   console.log("This stuff works like ...");

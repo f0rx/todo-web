@@ -83,12 +83,30 @@
         <v-card>
           <v-toolbar light color="transparent" dense elevation="0">
             <v-btn icon light @click="openFolderModal = false">
-              <v-icon>mdi-arrow-left</v-icon>
+              <v-icon class="d-md-none">mdi-arrow-left</v-icon>
+              <v-icon class="d-none d-md-block">mdi-close</v-icon>
             </v-btn>
             <!-- <v-toolbar-title>Settings</v-toolbar-title> -->
             <v-spacer></v-spacer>
             <v-toolbar-items>
-              <v-btn light text @click="openFolderModal = false">Save</v-btn>
+              <v-btn light text class="d-none d-md-block" @click="openFolderModal = false">Delete</v-btn>
+
+              <v-menu left bottom nudge-bottom="15" nudge-left="30">
+                <template v-slot:activator="{ on }">
+                  <v-btn icon v-on="on" class="d-md-none">
+                    <v-icon>mdi-dots-vertical</v-icon>
+                  </v-btn>
+                </template>
+
+                <v-list>
+                  <v-list-item :ripple="true">
+                    <v-list-item-title @click="openFolderModal = false">Done</v-list-item-title>
+                  </v-list-item>
+                  <v-list-item :ripple="true">
+                    <v-list-item-title>Delete</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
             </v-toolbar-items>
           </v-toolbar>
           <!--  -->
@@ -138,6 +156,12 @@
         </v-card>
       </v-dialog>
     </v-row>
+
+    <!-- Notify Snackbar -->
+    <v-snackbar v-model="snackbar" right bottom :timeout="4000" v-if="snackBar_msg !== null">
+      {{ snackBar_msg }}
+      <v-btn color="white" text v-show="snackBar_actionMsg !== null">{{ snackBar_actionMsg }}</v-btn>
+    </v-snackbar>
   </span>
 </template>
 
@@ -155,6 +179,28 @@ export default {
     openFolderModal: false,
     valueDeterminate: 37
   }),
+
+  methods: {
+    createFolder() {
+      this.folderModal = false;
+      this.$firestore
+        .collection("1234-user_id")
+        .doc(this.folder.name)
+        .set({
+          exists: true
+        })
+        .then(function() {
+          this.showSnackbar("Folder created!");
+        })
+        .catch(function(error) {
+          console.error("Error creating folder ", error);
+        });
+    },
+
+    createTask() {
+      this.taskModal = false;
+    }
+  },
 
   mounted() {
     Event.$on(

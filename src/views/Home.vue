@@ -5,15 +5,15 @@
         <v-col cols="0" xl="4" lg="3" md="3" sm="2" tag="span"></v-col>
         <v-col>
           <v-hover>
-            <v-avatar size="65" v-ripple style="cursor: pointer">
-              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+            <v-avatar size="66" v-ripple style="cursor: pointer">
+              <img src="/img/anonymous.png" class="pa-1" alt="John" />
             </v-avatar>
           </v-hover>
 
-          <p class="text-left mt-4 headline" :class="textColor">Hello, Brendan.</p>
+          <p class="text-left mt-4 headline" :class="textColor">Hello, Guest.</p>
           <p class="body-2" :class="textColor">
             This is a daily plot
-            <br />You have 10 tasks to do today
+            <br />You have 0 tasks to do today
           </p>
 
           <v-card class="mt-10" color="primary" flat shaped outlined tile>
@@ -21,7 +21,7 @@
           </v-card>
 
           <v-chip-group column>
-            <v-chip label outlined pill v-for="(item, index) in 4" :key="index">
+            <v-chip label outlined pill>
               <v-icon left>mdi-folder</v-icon>Folder Name
             </v-chip>
           </v-chip-group>
@@ -34,7 +34,7 @@
 
           <v-container class="pa-0">
             <v-row dense>
-              <v-col cols="12" sm="6" md="6" lg="6" xl="4" v-for="(item, index) in 3" :key="index">
+              <v-col cols="12" sm="6" md="6" lg="6" xl="4">
                 <v-card :ripple="can_ripple" hover shaped @click="openFolder">
                   <v-card-title
                     class="px-1 pt-1 mb-12"
@@ -137,6 +137,10 @@ export default {
   computed: {
     textColor() {
       return this.$vuetify.theme.dark ? "white--text" : "white--text";
+    },
+
+    folders() {
+      // firebase
     }
   },
 

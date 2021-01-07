@@ -35,8 +35,24 @@ export default {
     tabs: 2
   }),
 
+  watch: {
+    $route: {
+      handler: (to, from) => {
+        console.log(to);
+        console.log(this.$store.state.user);
+      },
+      deep: true, 
+      immediate: true
+    }
+  },
+
   mounted() {
-    //
+    Event.$on("isAuthenticated", uid => {
+      // this.$router.replace({
+      //   name: "profile",
+      //   params: { uid }
+      // });
+    });
   }
 };
 </script>

@@ -4,13 +4,20 @@
       <v-row class="mb-6" no-gutters :color="$vuetify.dark ? 'primary darken-1' : 'primary'">
         <v-col cols="0" xl="4" lg="3" md="3" sm="2" tag="span"></v-col>
         <v-col>
-          <v-hover>
-            <v-avatar size="66" v-ripple style="cursor: pointer">
-              <img src="/img/anonymous.png" class="pa-1" alt="John" />
-            </v-avatar>
-          </v-hover>
+          <v-flex xs12>
+            <v-hover>
+              <v-avatar size="66" v-ripple contain style="cursor: pointer">
+                <router-link :to="{ name: 'profile', params: { uid: user.uid } }">
+                  <img src="/img/anonymous.png" class="pa-1" :alt="user.name" />
+                </router-link>
+              </v-avatar>
+            </v-hover>
+          </v-flex>
 
-          <p class="text-left mt-4 headline" :class="textColor">Hello, Guest.</p>
+          <p
+            class="text-left mt-4 headline"
+            :class="textColor"
+          >Hello, {{ user.name | capitalizeText }}.</p>
           <p class="body-2" :class="textColor">
             This is a daily plot
             <br />You have 0 tasks to do today
@@ -148,6 +155,10 @@ export default {
     openFolder() {
       Event.$emit("read-folder-modal");
     }
+  },
+
+  mounted() {
+    //
   }
 };
 </script>

@@ -1,8 +1,16 @@
-const functions = require('firebase-functions');
+const functions = require("firebase-functions");
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+// Create and Deploy Your First Cloud Functions
+// https://firebase.google.com/docs/functions/write-firebase-functions
+
+// const { createUserRecord } = require("./src/callable");
+const { updateUserRecord } = require("./src/callable");
+const { addUserRecord } = require("./src/auth");
+const { sendEmailVerification } = require("./src/auth");
+
+module.exports = {
+    // createUserRecord: functions.https.onCall(createUserRecord),
+    updateUserRecord: functions.https.onCall(updateUserRecord),
+    addUserRecord: functions.auth.user().onCreate(addUserRecord),
+    sendEmailVerification: functions.auth.user().onCreate(sendEmailVerification)
+};

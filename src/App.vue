@@ -11,13 +11,12 @@
 </template>
 
 <script>
-import colors from "vuetify/es5/util/colors";
+import mixin from "./plugins/main-mixin";
+
 export default {
   name: "App",
 
-  data: () => ({
-    //
-  }),
+  mixins: [mixin],
 
   computed: {
     getTheme() {
@@ -26,7 +25,17 @@ export default {
   },
 
   mounted() {
-    //
+    let data = {
+      name: "Brendan Ejike C.",
+      level: 300,
+      verified: true
+    };
+
+    // const entries = Object.entries(data);
+
+    // for (const [index, value] of entries) {
+    //   console.log({ [index]: value });
+    // }
   }
 };
 </script>
